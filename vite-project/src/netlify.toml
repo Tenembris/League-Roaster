@@ -1,0 +1,3 @@
+[build]
+  command = "npm run build"  # Komenda do budowania Twojej aplikacji
+  publish = "dist"           # Katalog, z którego Netlify będzie serwował Twoją aplikację
