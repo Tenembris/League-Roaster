@@ -1,0 +1,331 @@
+:root {
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #242424;
+  color: white;
+}
+
+.champion-list {
+  /* Dodaj swoje style */
+}
+
+.filter-buttons {
+  /* Dodaj swoje style */
+}
+
+.search-box {
+  /* Dodaj swoje style */
+}
+
+
+.gray-text {
+  color: gray; /* Change the color to gray */
+}
+
+
+.champion-grid {
+    display: grid;
+    padding: 5em;
+    grid-template-columns: repeat(5, 1fr); /* 5 kolumn na bazie */
+    gap: 20px; /* Odstęp między championami */
+  
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(4, 1fr); /* 4 kolumny */
+    }
+  
+    @media (max-width: 900px) {
+      grid-template-columns: repeat(3, 1fr); /* 3 kolumny */
+    }
+  
+    @media (max-width: 600px) {
+      grid-template-columns: repeat(2, 1fr); /* 2 kolumny */
+    }
+  
+
+  }
+  
+  
+
+  .champion-item-wrapper {
+    position: relative;
+    
+    width: auto; /* dostosuj szerokość i wysokość do preferencji */
+    height: 240px;
+    background-size: cover; /* dopasowanie obrazka do rozmiaru kontenera */
+    background-position: center center; /* wyśrodkowanie obrazka */
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+  }
+  
+  .champion-info-min {
+    
+    width: 100%;
+    /* From https://css.glass */
+background: rgba(0, 0, 0, 0.36);
+
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(4px);
+-webkit-backdrop-filter: blur(4px); /* tło dla informacji o championie */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    
+    overflow: hidden;
+    text-align: center;
+    position: absolute;
+    
+    transform: translate3d(0, 50px, 0);
+    transition: transform 0.3s ease;
+
+  }
+
+  .champion-item-wrapper:hover .champion-info-min {
+    transform: translate3d(0, 0, 0); /* Po najechaniu myszą przesuń champion-info-min w pozycję początkową */
+    
+  }
+
+
+
+  
+
+.championName {
+  
+  
+ 
+  width: 100%;
+  
+  color: white;
+  
+  font-size: 1.5em;
+  padding-top: 0.5em;
+  padding-bottom: 1.2em;
+
+
+}
+
+.champion-info-min {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  overflow: hidden;
+}
+
+.champion-image {
+  width: 100%;
+  height: auto;
+  min-width: 240px; /* Minimalna szerokość obrazka */
+  min-height: auto; /* Minimalna wysokość obrazka */
+  /* Dodaj dodatkowe style */
+}
+
+
+nav {
+  position: fixed;
+  z-index: 300000;
+  top: 0;
+  width: 100%;
+  background-color: black;
+}
+
+
+nav ul li a{
+  
+  text-decoration: none;
+}
+
+nav ul {
+  list-style-type: none; /* Usuń domyślne style listy */
+  display: flex; /* Użyj flexbox */
+  justify-content: left; /* Wyśrodkuj elementy wzdłuż osi poziomej */
+  gap: 1em;
+
+}
+
+.component-parent-container {
+  margin-top: 50px;
+  
+}
+
+.Champion-section-Hero {
+  padding-top: 20em;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 40%;
+  position: relative;
+  
+  box-shadow: -1px -107px 58px -34px #242424 inset;
+  -webkit-box-shadow: -1px -107px 58px -34px #242424 inset;
+  -moz-box-shadow: -1px -107px 58px -34px #242424 inset;
+}
+
+
+.Champion-section-Hero h1{
+  font-size: 8.5em;
+  
+
+}
+
+
+.padding {
+  padding-left: 10em;
+  padding-right: 10em;
+  padding-top: 7em;
+}
+
+
+
+.champion-lore::first-letter {
+  font-size: 250%; /* Zwiększenie wielkości pierwszej litery */
+  margin-right: 0.3em; /* Dodanie odstępu po prawej stronie */
+  float: left; /* Umieszczenie pierwszej litery na lewo */
+  
+}
+
+.champion-lore {
+  font-size: 2em;
+  margin-bottom: 15%;
+}
+
+
+.Champion-section-Hero h1, .Champion-section-Hero h2 {
+position: absolute;
+top: 85%;
+right: 50%;
+translate: 50%;
+margin-top: 10px;
+text-transform: uppercase;
+letter-spacing: 0.03em;
+font-weight: 800;
+
+}
+
+.champion-information {
+  border: 2px solid #ccc; /* Grubość i kolor obramowania */
+  border-radius: 10px; /* Zaokrąglone rogi */
+  padding: 20px; /* Wewnętrzny margines */
+  border-top: none; /* Usunięcie górnej krawędzi */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2em;
+  margin-bottom: 15%;
+}
+
+.champion-information div {
+  display: flex;
+  justify-content: right;
+}
+
+.champion-information h3 {
+  font-size: 2em;
+  
+}
+
+.champion-skills p {
+  font-size: 16px;
+  margin: 0;
+}
+
+.skills-container{
+  margin-top: 5%;
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  
+
+}
+
+.spell {
+  cursor: pointer;
+  transition: ease 0.5s;
+}
+
+.spell:hover {
+  scale: 1.1;
+}
+
+.selected-spell-info {
+  width: 50%;
+  padding: 3em;
+  border-radius: 25px 0 25px 0;
+  border: 2px solid #ccc;
+  height: 250px;
+  width: 500px;
+  margin-bottom: 5%;
+}
+
+.champion-tips{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 10%;
+}
+
+.champion-tips ul {
+  width: 35%;
+  border-radius: 25px 0 25px 0;
+  border: 2px solid #ccc;
+  border-bottom: none;
+  border-top: none;
+  padding: 3em;
+}
+
+.champion-tips ul li {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.champion-tips div {
+  margin-top: 10%;
+  display: flex;
+  justify-content:baseline;
+  flex-direction: column;
+  align-items: center;
+ 
+}
+
+.info-video-container{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+video {
+
+    width: calc(1058px * 0.66); /* Szerokość, którą chcesz ustawić */
+    height: calc(720px * 0.66); /* Wysokość obliczona jako połowa szerokości */
+
+    box-shadow: 12px 13px 24px 3px rgba(0,0,0,0.91);
+    -webkit-box-shadow: 12px 13px 24px 3px rgba(0,0,0,0.91);
+    -moz-box-shadow: 12px 13px 24px 3px rgba(0,0,0,0.91);
+}
+
+.stats-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 3em;
+  
+
+}
+
+.stats-box h4, h3 {
+  font-size: 1.5em;
+  padding: 0.005em;
+  margin: 0;
+}
+
+.golden-span {
+  color: #D0A85C;
+}
