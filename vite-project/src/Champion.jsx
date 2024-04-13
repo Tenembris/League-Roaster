@@ -23,7 +23,7 @@ const Champion = () => {
           'KhaZix': 'Khazix',
           'BelVeth': 'Belveth',
           'ChoGath': 'Chogath',
-          'Fiddlesticks': 'FiddleSticks',
+          'Fiddlesticks': 'Fiddlesticks',
           'KaiSa': 'Kaisa',
           'LeBlanc': 'Leblanc',
           'VelKoz': 'Velkoz',
@@ -65,8 +65,10 @@ const Champion = () => {
         spellName = 'R';
         break;
       default:
-        spellName = 'passive';
+        spellName = 'P'; // P for passive
     }
+
+    console.log(`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${formattedChampionId}/ability_${formattedChampionId}_${spellName}1.webm`)
     return `https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${formattedChampionId}/ability_${formattedChampionId}_${spellName}1.webm`;
   };
 
@@ -77,7 +79,9 @@ const Champion = () => {
   };
 
   const handleImageClick = () => {
-    setAbilityVideoLink(generateAbilityVideoLink(championData.key, selectedSpellIndex));
+    // For passive spell, set selectedSpellIndex to 4
+    setSelectedSpellIndex(4);
+    setAbilityVideoLink(generateAbilityVideoLink(championData.key, 4)); // 4 for passive
   };
 
   if (!championData) {
@@ -85,6 +89,12 @@ const Champion = () => {
   }
 
   const splashArtName = `${imageName}_0.jpg`;
+
+  const formatDescription = (description) => {
+    return description.replace(/<font color='#(\w+)'>/g, (match, color) => `<span style="color: #${color}">`)
+                      .replace(/<\/font>/g, '</span>')
+                      .replace(/<br>/g, '<br />');
+  };
 
   return (
     <div className='component-parent-container'>
@@ -108,51 +118,69 @@ const Champion = () => {
   {championData.tags[1] && ` • ${championData.tags[1]}`}
 </h3>
 </div>
-          <div>
+          <div className='stats-spec-info'>
             <ul>
-              <li> <img src="../assets/statmodshealthscalingicon.png" alt="" /> Health: {championData.stats.hp}</li>
-              <li>Health per Level: {championData.stats.hpperlevel}</li>
-              <li>Magic Resist: {championData.stats.spellblock}</li>
-              <li>Magic Resist per level: {championData.stats.spellblockperlevel}</li>
-              <li>hpregen: {championData.stats.hpregen}</li>
-              <li>hpregenperlevel: {championData.stats.hpregenperlevel}</li>
+              <li> <img src="../src/statmodshealthscalingicon.png" alt="" />  {championData.stats.hp} + {championData.stats.hpperlevel} per level</li>
+              
+              <li> <img src="../src/statmodsmagicresicon.png" alt="" /> {championData.stats.spellblock} + {championData.stats.spellblockperlevel} per level</li>
+              
+              <li><img src="../src/StatModsHealthPlusIcon.png" alt="" /> {championData.stats.hpregen} + {championData.stats.hpregenperlevel} per level</li>
+              <li> <img src="../src/StatModsArmoricon.png" alt="" />{championData.stats.armor} + {championData.stats.armorperlevel} per level</li>
             </ul>
             <ul>
-              <li>movespeed: {championData.stats.movespeed}</li>
-              <li>attackrange: {championData.stats.attackrange}</li>
-              <li>attackdamage: {championData.stats.attackdamage}</li>
-              <li>attackdamageperlevel: {championData.stats.attackdamageperlevel}</li>
-              <li>attackspeed: {championData.stats.attackspeed}</li>
-              <li>attackspeedperlevel: {championData.stats.attackspeedperlevel}</li>
+              
+              
+              <li><img src="../src/statmodsattackdamageicon.png" alt="" /> {championData.stats.attackdamage} + {championData.stats.attackdamageperlevel} per level</li>
+              
+              <li><img src="../src/StatModsAttackSpeedIcon.png" alt="" /> {championData.stats.attackspeed} + {championData.stats.attackspeedperlevel } per level</li>
+              
+              <li> <img src="../src/range-icon.png"  style={{ padding: '9px' }} alt="" />  {championData.stats.attackrange}</li>
+              <li> <img src="../src/StatModsMovementSpeedIcon.png" alt="" />  {championData.stats.movespeed}</li>
             </ul>
           </div>
         </div>
 
         <p className='champion-lore'>{championData.lore}</p>
 
-        <h2>
-            SKills
+        <h2 className='title-h2'>
+        Abilities
+
           </h2>
 <div className='info-video-container'>
 
   
-{selectedSpell && (
-          <div className="selected-spell-info">
-            <h2>{selectedSpell.name}</h2>
-            <p>Description: {selectedSpell.description}</p>
-            <p>Cost: {selectedSpell.costBurn || selectedSpell.costBurn === 0 ? selectedSpell.costBurn : 'No cost'}</p>
-            <p>Cooldown: {selectedSpell.cooldownBurn || selectedSpell.cooldownBurn === 0 ? selectedSpell.cooldownBurn : '0'}</p>
-          </div>
-        )}
+<div>
+  {selectedSpell && (
+    <div className="selected-spell-info">
+      <h2>{selectedSpell.name}</h2>
+      <p>
+        <span dangerouslySetInnerHTML={{ __html: formatDescription(selectedSpell.description) }} />
+      </p>
+      <p>Cost: {selectedSpell.costBurn || selectedSpell.costBurn === 0 ? selectedSpell.costBurn : 'No cost'}</p>
+      <p>Cooldown: {selectedSpell.cooldownBurn || selectedSpell.cooldownBurn === 0 ? selectedSpell.cooldownBurn : '0'}</p>
+    </div>
+  )}
+</div>
+
 
 <div className="additional-ability-videos">
-          {abilityVideoLink && (
-            <video key={selectedSpell.id}  autoPlay={true} loop={true} muted controls={false}>
-              <source src={abilityVideoLink} type="video/webm" />
-              Your browser does not support the video tag.
-            </video>
-          )}
-        </div>
+  {abilityVideoLink === null ? (
+    <div className="passive-video-placeholder">
+      <img src="../src/placeholder.jpeg" alt="Passive Ability Placeholder" />
+      <h3>There is no video for this ability</h3>
+    </div>
+  ) : (
+    <video key={selectedSpell.id + (selectedSpellIndex === 4 ? '-passive' : '')} autoPlay={true} loop={true} muted controls={false} onError={() => setAbilityVideoLink(null)}>
+      <source src={abilityVideoLink} type="video/webm" />
+      Your browser does not support the video tag.
+    </video>
+  )}
+</div>
+
+
+
+
+
 </div>
 
         <div className='champion-skills'>
@@ -173,7 +201,6 @@ const Champion = () => {
               <img
                 src={`https://ddragon.leagueoflegends.com/cdn/${patchVersion}/img/passive/${championData.passive.image.full}`}
                 alt={championData.passive.name}
-                onClick={handleImageClick} // Dodane obsługi zdarzenia kliknięcia na obrazek
               />
               <div className='spell-details'>
                 

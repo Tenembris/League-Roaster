@@ -188,7 +188,7 @@ nav ul {
   font-size: 250%; /* Zwiększenie wielkości pierwszej litery */
   margin-right: 0.3em; /* Dodanie odstępu po prawej stronie */
   float: left; /* Umieszczenie pierwszej litery na lewo */
-  
+  color: #D0A85C;
 }
 
 .champion-lore {
@@ -248,6 +248,8 @@ font-weight: 800;
 .spell {
   cursor: pointer;
   transition: ease 0.5s;
+ 
+
 }
 
 .spell:hover {
@@ -256,12 +258,16 @@ font-weight: 800;
 
 .selected-spell-info {
   width: 50%;
-  padding: 3em;
-  border-radius: 25px 0 25px 0;
-  border: 2px solid #ccc;
-  height: 250px;
+
   width: 500px;
-  margin-bottom: 5%;
+ 
+}
+
+.selected-spell-info h2 {
+  font-size: 3em;
+}
+.selected-spell-info p {
+  font-size: 1.2em;
 }
 
 .champion-tips{
@@ -302,8 +308,8 @@ font-weight: 800;
 
 video {
 
-    width: calc(1058px * 0.66); /* Szerokość, którą chcesz ustawić */
-    height: calc(720px * 0.66); /* Wysokość obliczona jako połowa szerokości */
+    width: calc(1058px * 0.70); /* Szerokość, którą chcesz ustawić */
+    height: calc(720px * 0.70); /* Wysokość obliczona jako połowa szerokości */
 
     box-shadow: 12px 13px 24px 3px rgba(0,0,0,0.91);
     -webkit-box-shadow: 12px 13px 24px 3px rgba(0,0,0,0.91);
@@ -329,3 +335,29 @@ video {
 .golden-span {
   color: #D0A85C;
 }
+
+.test-img {
+  width: 20px;
+  height: 20px;
+}
+
+.stats-spec-info ul li{
+  list-style: none;
+}
+
+.stats-spec-info li {
+  display: flex;
+  
+  align-items: center;
+}
+
+.title-h2{
+  font-size: 3.5em;
+}
+
+    @media (max-width: 1100px) {
+      .info-video-container{
+        flex-direction: column-reverse;
+        font-size: 1em;
+      }
+    }
