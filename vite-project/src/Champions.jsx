@@ -9,16 +9,17 @@ const Champions = () => {
   const [imageCache, setImageCache] = useState({}); // Dodaj stan dla cache obrazków
 
   useEffect(() => {
-    // Pobierz numer patcha z serwera
-    fetch('http://localhost:3000/api/patch-version')
-      .then(response => response.json())
-      .then(data => {
-        setCurrentPatch(data.patchVersion);
+    // Pobierz numer patcha z zewnętrznego API
+    axios.get('https://ddragon.leagueoflegends.com/api/versions.json')
+      .then(response => {
+        const currentPatchVersion = response.data[0];
+        setCurrentPatch(currentPatchVersion);
 
-        axios.get(`https://ddragon.leagueoflegends.com/cdn/${data.patchVersion}/data/en_US/champion.json`)
+        // Pobierz dane o postaciach
+        axios.get(`https://ddragon.leagueoflegends.com/cdn/${currentPatchVersion}/data/en_US/champion.json`)
           .then(response => {
             const championData = response.data.data;
-            
+
             const champions = Object.keys(championData).map(championKey => {
               const imageName = getChampionImageName(championData[championKey].name);
 
@@ -40,15 +41,17 @@ const Champions = () => {
                 tags: championData[championKey].tags
               };
             });
-            
+
             setChampions(champions);
-            
+
           })
           .catch(error => {
             console.error('Wystąpił błąd podczas pobierania danych o postaciach:', error);
           });
       })
-      .catch(error => console.error('Wystąpił błąd podczas pobierania numeru patcha:', error));
+      .catch(error => {
+        console.error('Wystąpił błąd podczas pobierania numeru patcha:', error);
+      });
   }, []); 
 
   const handleTagSelect = (tag) => {
